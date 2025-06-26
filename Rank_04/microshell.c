@@ -6,11 +6,13 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 16:11:50 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/06/23 19:44:09 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/06/26 19:13:12 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "microshell.h"
+#include "string.h"
+#include "unistd.h"
+#include "sys/wait.h"
 
 int error(char *str)
 {
@@ -49,7 +51,6 @@ int exec(char **argv, char **envp, int i)
         execve(*argv, argv, envp);
         return error("error: cannot execute "), error(*argv), error("\n");
     }
-
     waitpid(pid, &status, 0);
     if (is_pipe && (dup2(fd[0], 0) == -1 || close(fd[0]) == -1 || close(fd[1]) == -1))
         return error("error: fatal\n");
@@ -57,28 +58,17 @@ int exec(char **argv, char **envp, int i)
 }
 
 //Ejecuta un comando usando fork() y execve()
-
 //Si hay un "|", crea un pipe
-
 //Usa dup2() para redirigir la entrada/salida cuando es necesario
-
 //Verifica si hay un pipe al final del comando:
-
 //int is_pipe = argv[i] && strcmp(argv[i], "|") == 0;
 //Si hay un pipe, crea con pipe(fd)
-
 //Hace un fork() para crear un proceso hijo
-
 //Cierra y redirige los pipes si es necesario
-
 //Llama a execve() para ejecutar el comando
-
 //Si falla, imprime error
-
 //Espera con waitpid()
-
 //Redirige la entrada si hay pipe
-
 
 int main(int argc, char **argv, char **envp) 
 {
@@ -91,11 +81,9 @@ int main(int argc, char **argv, char **envp)
         {
             argv += i;
             i = 0;
-
             // Recorre hasta encontrar un "|" o ";"
             while (argv[i] && strcmp(argv[i], "|") != 0 && strcmp(argv[i], ";") != 0)
                 i++;
-
             // Si el comando es "cd"
             if (strcmp(*argv, "cd") == 0)
                 status = cd(argv, i);
