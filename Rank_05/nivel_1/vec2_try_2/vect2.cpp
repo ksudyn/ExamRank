@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 14:07:58 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/11/11 20:27:33 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/11/17 18:46:25 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ vect2 vect2::operator-(const vect2& to_rest) const
     return temp;
 }
 
-//DEvuelve el vector opuesto.
+//Devuelve el vector opuesto.
 vect2 vect2::operator-() const
 {
     vect2 temp = *this;
@@ -187,10 +187,16 @@ bool vect2::operator==(const vect2& yes) const
 
 // Aqui se multiplica un numero por un vector cuando el número está a la izquierda (2 * v),
 // antes se hace al reves y esta dentro de la clase, esto no.
-// Esto crea un temporal donde se guarda el vector y este se multiplica por el int y se retorna el resultado.
+// En esta multiplicacion se le da el valor a temp de to_mult
+// luego temp se le da el valor de temp por el int que se le pasa y se retorna el resultado.
 vect2 operator*(int num,const vect2& to_mult)
 {
 	vect2 temp(to_mult);
 	temp *= num;
 	return temp;
 }
+
+
+// Cuando trabajamos con this se le pone ->, cunado es con temp se pone .
+// Recordar qe en las sumas y restas uno es += y otro solo + pero funcionan igual
+// solo que + con temp y siendo const y += con la referencia

@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 18:45:19 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/11/13 20:27:47 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/11/17 20:31:30 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <stdexcept>
 #include <sstream>
 #include <iostream>
-#include <cstdlib>
 
 class bigint
 {
