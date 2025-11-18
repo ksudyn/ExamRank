@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 18:45:25 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/11/14 15:51:45 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/11/18 19:04:50 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void bigint::validate()
 {
     if (this->_str.empty())
 	{
-		exit(1);
+		return ;
 	}
     int i = 0;
     while(this->_str[i] && this->_str[i] == '0')
