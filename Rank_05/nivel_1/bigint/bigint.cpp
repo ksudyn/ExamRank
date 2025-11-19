@@ -6,7 +6,7 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 18:45:25 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/11/18 19:04:50 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/11/19 20:41:53 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ bigint::bigint()
 // Constructor desde un entero -> convierte el número a string
 bigint::bigint(unsigned int n)
 {
+    if(n == 0)
+    {
+        this->_str = "0";
+        return;
+    }
     std::ostringstream os;
     os << n;
     this->_str = os.str();
@@ -220,7 +225,7 @@ bool bigint::operator<=(const bigint& obj)
 
 bool bigint::operator>=(const bigint& obj)
 {
-	if ((this >&obj) || this == &obj)
+	if ((this > &obj) || this == &obj)
 	{
 		return true;
 	}
