@@ -6,56 +6,23 @@
 /*   By: ksudyn <ksudyn@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 14:21:29 by ksudyn            #+#    #+#             */
-/*   Updated: 2025/11/18 15:59:40 by ksudyn           ###   ########.fr       */
+/*   Updated: 2025/12/03 18:10:35 by ksudyn           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_of_life.h"
 
-int main(int ac, char **av)
+int main(int argc, char **argv)
 {
-	if(ac != 4)
-		return 1;
-
-	int w = atoi(av[1]);
-	int h = atoi(av[2]);
-	int iter = atoi(av[3]);
-
-	char *board = calloc(w*h, 1);
-	char *next = calloc(w*h, 1);
-
-	if(!board || !next)
-		return 1;
-
-	int x = 0, y = 0, pen = 0;
-	char c;
-
-	while (read(0, &c, 1) > 0)
-	{
-		if(c == 'x')
-			pen = !pen;
-		if(c == 'a' && x > 0)
-			x--;
-		else if(c == 'd' && x < w -1)
-			x++;
-		else if(c == 'w' && y > 0)
-			y--;
-		else if(c == 's' && y < h -1)
-			y++;
-		if(pen)
-			board[y * w + x] = 1;
-	}
-
-	for(int i = 0; i < iter; i++)
-	{
-		step(board, next, w, h);
-		char *temp = board;
-		board = next;
-		next = temp;
-	}
-	
-	printboard(board, w, h);
-	free(board);
-	free(next);
-	return 0;
+    if (argc != 4) return 1;
+    int w = atoi(argv[1]);
+    int h = atoi(argv[2]);
+    int it = atoi(argv[3]);
+    struct game_of_life *g = game_init(w, h, it);
+    if (!g) return 1;
+    game_read_input(g);
+    for (int i = 0; i < g->iterations; ++i) step_once(g);
+    game_print(g);
+    game_free(g);
+    return 0;
 }
